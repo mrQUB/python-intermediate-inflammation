@@ -2,6 +2,8 @@
 """Software for managing and analysing patients' inflammation data in our imaginary hospital."""
 
 import argparse
+from matplotlib import pyplot as plt
+import numpy as np
 
 from inflammation import models, views
 
