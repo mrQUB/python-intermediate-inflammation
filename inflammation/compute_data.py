@@ -61,8 +61,9 @@ def controller(infiles):
     else:
         raise ValueError(f'Unsupported data file format: {extension}')
     data_result = analyse_data(data_source)
-    graph_data = {
-        'standard deviation by day': data_result,
-    }
-    views.visualize(graph_data)
     return data_result
+
+
+def view(data_result):
+    graph_data = {'standard deviation by day': data_result}
+    views.visualize(graph_data)

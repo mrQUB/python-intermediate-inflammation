@@ -5,7 +5,7 @@ import argparse
 import os
 
 from inflammation import models, views
-from inflammation.compute_data import analyse_data
+from inflammation.compute_data import controller, view
 
 
 def main(args):
@@ -19,7 +19,6 @@ def main(args):
     if not isinstance(infiles, list):
         infiles = [args.infiles]
 
-
     for filename in InFiles:
         inflammation_data = models.load_csv(filename)
 
@@ -27,7 +26,8 @@ def main(args):
                      'min': models.daily_min(inflammation_data)}
 
     if args.full_data_analysis:
-        analyse_data(os.path.dirname(infiles[0]))
+        data_result = controller(os.path.dirname(infiles[0]))
+        view(data_result)
         return
 
     for filename in infiles:
@@ -38,7 +38,6 @@ def main(args):
             'max': models.daily_max(inflammation_data),
             'min': models.daily_min(inflammation_data)
         }
-
 
         views.visualize(view_data)
 
